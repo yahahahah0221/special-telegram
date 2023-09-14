@@ -1,0 +1,6 @@
+com\jjj\test\Test.class
+com\jjj\pojo\User.class
+com\jjj\controller\UserController.class
+com\jjj\service\UserServiceImpl.class
+com\jjj\service\UserService.class
+com\jjj\dao\UserDao.class

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <mappers>
+        <mapper resource="UserDao.xml" />
+        <mapper resource="AdminDao.xml"/>
+        <mapper resource="GoodsTypeDao.xml"/>
+        <mapper resource="AdminGoodsDao.xml"/>
+        <mapper resource="OrderDao.xml"/>
+        <mapper resource="AdminUserDao.xml"/>
+        <mapper resource="AdminNotice.xml"/>
+        <mapper resource="BeforeIndexDao.xml"/>
+        <mapper resource="BeforeUserDao.xml"/>
+        <mapper resource="BeforeSearchDao.xml"/>
+        <mapper resource="CartDao.xml"/>
+    </mappers>
+</configuration>

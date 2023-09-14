@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjj.dao.AdminGoodsDao">
+    <insert id="insertGoods" parameterType="com.jjj.pojo.Goods">
+        insert into shop.goodstable (gname, goprice, grprice, gstore, gpicture, goodstype_id)
+        values (#{gname},#{goprice},#{grprice},#{gstore},#{gpicture},#{goodstype_id})
+    </insert>
+    <update id="updateGoods" parameterType="com.jjj.pojo.Goods">
+        update shop.goodstable set gname=#{gname}, grprice=#{grprice}, goprice=#{goprice}, gstore=#{gstore},gpicture=#{gpicture},
+                                   goodstype_id=#{goodstype_id}
+                                    where id=#{id}
+    </update>
+    <delete id="deleteAGoods">
+        delete from shop.goodstable where id=#{id}
+    </delete>
+    <delete id="deleteGoods" parameterType="arraylist">
+        delete from shop.goodstable where id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="selectGoods" resultType="com.jjj.pojo.Goods">
+        select * from shop.goodstable where 1=1;
+    </select>
+    <select id="totalGoods" resultType="java.lang.Integer">
+        select count(*) from shop.goodstable where 1=1;
+    </select>
+    <select id="selectGoodsByPage" resultType="com.jjj.pojo.Goods">
+        select * from shop.goodstable limit #{startIndex},#{pageSize};
+    </select>
+    <select id="selectAGoods" resultType="com.jjj.pojo.Goods">
+        select shop.goodstable.*,shop.goodstype.typename from shop.goodstable,shop.goodstype where shop.goodstable.id=#{id} and goodstype_id=shop.goodstype.id
+    </select>
+    <select id="selectCartBGood" resultType="com.jjj.pojo.Carttable">
+        select *from shop.carttable where carttable.goodstable_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectFouce" resultType="com.jjj.pojo.Focustable">
+        select *from shop.focustable where focustable.goodstable_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectOrderDe" resultType="com.jjj.pojo.OrderDetail">
+        select *from shop.orderdetail where orderdetail.goodstable_id in
+        <foreach collection="array" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectACartBGood" resultType="com.jjj.pojo.Carttable">
+        select * from shop.carttable where goodstable_id=#{id}
+    </select>
+    <select id="selectAFouce" resultType="com.jjj.pojo.Focustable">
+        select * from shop.focustable where goodstable_id=#{id}
+    </select>
+    <select id="selectAOrderDe" resultType="com.jjj.pojo.OrderDetail">
+        select * from shop.orderdetail where goodstable_id=#{id}
+    </select>
+</mapper>

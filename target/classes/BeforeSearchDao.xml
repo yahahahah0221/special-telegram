@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjj.dao.BeforeSearchDao">
+    <select id="selectGoodsByGoodsTypeId" resultType="com.jjj.pojo.Goods">
+        select * from shop.goodstable where goodstype_id=#{id}
+    </select>
+    <select id="selectGoodsByMykey" resultType="com.jjj.pojo.Goods">
+        select *
+        from shop.goodstable where gname like concat('%',concat(#{mykey},'%'))
+                                or goodstype_id =(select goodstype.id
+                                from shop.goodstype where typename like concat('%',concat(#{mykey},'%')));
+    </select>
+    <select id="GoodsDetailById" resultType="com.jjj.pojo.Goods">
+        select *,shop.goodstype.typename
+        from shop.goodstable,shop.goodstype where shop.goodstable.id=#{id}
+                                              and goodstype_id=shop.goodstype.id
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjj.dao.BeforeIndexDao">
+    <select id="selectGoodsType" resultType="com.jjj.pojo.GoodsType">
+        select * from shop.goodstype ;
+    </select>
+    <select id="selectAllNotice" resultType="com.jjj.pojo.Notice">
+        select * from shop.noticetable where 1=1
+    </select>
+    <select id="selectNoticeById" resultType="com.jjj.pojo.Notice">
+        select * from shop.noticetable where id=#{id}
+    </select>
+    <select id="selectXiaoShou" resultType="com.jjj.pojo.Goods">
+        select sum(od.shoppingnum) summ,
+               gs.id, gname, goprice, grprice, gstore, gpicture, goodstype_id
+        from shop.goodstable gs LEFT JOIN shop.orderdetail od on gs.id = od.goodstable_id
+        group by gs.id
+        order by summ desc limit 10
+    </select>
+    <select id="selectRenQi" resultType="com.jjj.pojo.Goods">
+        select count(od.goodstable_id) summ,
+       gs.id, gname, goprice, grprice, gstore, gpicture, goodstype_id
+from shop.goodstable gs LEFT JOIN shop.focustable od on gs.id = od.goodstable_id
+group by gs.id
+order by summ desc limit 10
+    </select>
+    <select id="selectNew" resultType="com.jjj.pojo.Goods">
+        select * from shop.goodstable order by id desc limit 10;
+    </select>
+
+</mapper>

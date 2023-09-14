@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjj.dao.AdminUserDao">
+    <delete id="deleteUser">
+        delete from shop.busertable where id=#{id}
+    </delete>
+    <select id="selectInfo" resultType="com.jjj.pojo.Busertable">
+        select * from shop.busertable ;
+    </select>
+</mapper>

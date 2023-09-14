@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjj.dao.BeforeUserDao">
+    <insert id="insertBuser">
+        insert into shop.busertable (bemail, bpwd) values (#{bemail},#{bpwd})
+    </insert>
+    <select id="selectByEmail" resultType="com.jjj.pojo.Busertable">
+        select * from shop.busertable where bemail=#{email}
+    </select>
+    <select id="selectOrderByEmail" resultType="com.jjj.pojo.OrderBaseTable">
+        select *
+        from shop.orderbasetable where busertable_id=(select id from shop.busertable where bemail=#{email});
+    </select>
+    <select id="selectGoodsTableByEmail" resultType="com.jjj.pojo.Goods">
+        select * from shop.goodstable
+        where id in (select goodstable_id from shop.focustable
+        where busertable_id=(select id from shop.busertable
+        where bemail=#{email}))
+    </select>
+    <select id="selectOrderDetailByOrderBaseid" resultType="map">
+        select goodstable.id id,gname,gpicture,grprice,shoppingnum
+        from shop.orderdetail,shop.goodstable
+        where orderbasetable_id=#{id} and goodstable_id=goodstable.id
+    </select>
+    <select id="selectGoodsById" resultType="com.jjj.pojo.Goods">
+        select * from shop.goodstable where id=#{id}
+    </select>
+</mapper>

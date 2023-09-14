@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjj.dao.AdminNotice">
+    <insert id="addNotice">
+        insert into shop.noticetable( ntitle, ncontent, ntime) values (#{ntitle},#{ncontent},#{ntime})
+    </insert>
+    <update id="updateNotice">
+        update shop.noticetable set ntime=#{ntime},ncontent=#{ncontent},ntitle=#{ntitle} where id=#{id}
+    </update>
+    <delete id="deleteNotice">
+        delete from shop.noticetable where id=#{id}
+    </delete>
+    <!--    <resultMap id="Notice" type="com.jjj.pojo.Notice">-->
+<!--        <collection property="id" column="id"/>-->
+<!--        <collection property="ntitle" column="ntitle"/>-->
+<!--        <collection property="ncontent" column="ncontent"/>-->
+<!--    </resultMap>-->
+    <select id="selectAll" resultType="com.jjj.pojo.Notice">
+        select id, ntitle, ncontent,ntime from shop.noticetable;
+    </select>
+    <select id="seleteById" resultType="com.jjj.pojo.Notice">
+        select * from shop.noticetable where id=#{id}
+    </select>
+
+
+</mapper>
